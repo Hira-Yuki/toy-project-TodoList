@@ -4,39 +4,21 @@ import DoneList from "./Components/DoneList";
 import WorkingList from "./Components/WorkingList";
 
 function App() {
-  // 저장된 할일 목록
-  const [todoList, setTodoList] = useState([
-    {
-      id: 1,
-      subtitle: "아침 고양이 보살피기",
-      todo: "물갈기, 화장실 치우기",
-      isDone: true,
-    },
-    {
-      id: 2,
-      subtitle: "고양이와 놀아주기",
-      todo: "사냥놀이 30분",
-      isDone: false,
-    },
-    {
-      id: 3,
-      subtitle: "공부한 내용 정리하기",
-      todo: "TIL, WIL 정리하기",
-      isDone: false,
-    },
-  ]);
+  // 디버깅을 위해 사전에 저장된 할일 목록 = 동작 확인 완료 후 빈 배열로 변경
+  const [todoList, setTodoList] = useState([]);
 
-  // 입력한 제목이 들어가는 공간
+  // 제목 입력을 받는 공간
   const [subtitle, setSubtitle] = useState("");
-  // 입력한 내용이 들어가는 공간
+  // 세부 할일을 입력 받는 공간
   const [todo, setTodo] = useState("");
-  // 할일 제목 입력
+
+  // 제목 변경 시 저장하는 함수
   const onSubtitleChangeHandler = function (event) {
     const inputsubtitle = event.target.value;
     setSubtitle(inputsubtitle);
   };
 
-  // 할일 목록 내용 입력
+  // 세부 할일 변경 시 저장하는 함수
   const onTodoChangeHandler = function (event) {
     const inputTodo = event.target.value;
     setTodo(inputTodo);
@@ -62,6 +44,7 @@ function App() {
     const newTodoList = todoList.filter((item) => item.id !== id);
     setTodoList(newTodoList);
   };
+
   // 작업중인 항목을 완료 상태로 변경
   const onDoneHandler = function (id) {
     setTodoList((prevState) =>
@@ -70,6 +53,7 @@ function App() {
       )
     );
   };
+  
   // 완료인 상태를 다시 작업 중으로 변경
   const onWorkingHandler = (id) => {
     setTodoList((prevState) =>
@@ -108,7 +92,7 @@ function App() {
           </button>
         </div>
         <div>
-          <h2>Working!!</h2>
+          <h2>Working...!!</h2>
           <div className="grid outputSpace">
             {/* 이 곳이 진행 중인 리스트가 들어갈 공간 */}
             <WorkingList
@@ -117,7 +101,7 @@ function App() {
               removeTodoButton={removeTodoButton}
             />
           </div>
-          <h2>Done..!!</h2>
+          <h2>Done!!</h2>
           <div className="grid outputSpace">
             {/* 이 곳이 완료된 리스트가 들어갈 공간 */}
             <DoneList
