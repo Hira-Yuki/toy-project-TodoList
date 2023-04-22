@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
-
-
-
+import DoneList from "./Components/DoneList";
+import WorkingList from "./Components/WorkingList";
 
 function App() {
   // 저장된 할일 목록
@@ -57,6 +56,29 @@ function App() {
     setSubtitle("");
     setTodo("");
   };
+
+  // 삭제 버튼 클릭 이벤트 처리
+  const removeTodoButton = function (id) {
+    const newTodoList = todoList.filter((item) => item.id !== id);
+    setTodoList(newTodoList);
+  };
+  // 작업중인 항목을 완료 상태로 변경
+  const onDoneHandler = function (id) {
+    setTodoList((prevState) =>
+      prevState.map((item) =>
+        item.id === id ? { ...item, isDone: true } : item
+      )
+    );
+  };
+  // 완료인 상태를 다시 작업 중으로 변경
+  const onWorkingHandler = (id) => {
+    setTodoList((prevState) =>
+      prevState.map((item) =>
+        item.id === id ? { ...item, isDone: false } : item
+      )
+    );
+  };
+
   return (
     <>
       <main className="container">
@@ -89,34 +111,20 @@ function App() {
           <h2>Working!!</h2>
           <div className="grid outputSpace">
             {/* 이 곳이 진행 중인 리스트가 들어갈 공간 */}
-            {todoList
-              .filter((item) => !item.isDone)
-              .map((item) => (
-                <article className="card" key={item.id}>
-                  <header>{item.subtitle}</header>
-                  <body>{item.todo}</body>
-                  <footer className="grid">
-                    <button>완료</button>
-                    <button className="contrast outline">삭제</button>
-                  </footer>
-                </article>
-              ))}
+            <WorkingList
+              todoList={todoList}
+              onDoneHandler={onDoneHandler}
+              removeTodoButton={removeTodoButton}
+            />
           </div>
           <h2>Done..!!</h2>
           <div className="grid outputSpace">
             {/* 이 곳이 완료된 리스트가 들어갈 공간 */}
-            {todoList
-              .filter((item) => item.isDone)
-              .map((item) => (
-                <article className="card" key={item.id}>
-                  <header>{item.subtitle}</header>
-                  <body>{item.todo}</body>
-                  <footer className="grid">
-                    <button>미완료</button>
-                    <button className="contrast outline">삭제</button>
-                  </footer>
-                </article>
-              ))}
+            <DoneList
+              todoList={todoList}
+              onWorkingHandler={onWorkingHandler}
+              removeTodoButton={removeTodoButton}
+            />
           </div>
         </div>
       </main>
