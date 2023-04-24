@@ -128,7 +128,7 @@ function App() {
             />
           </div>
         </div>
-<img src="https://count.getloli.com/get/@:todo?theme=gelbooru" alt=":todo" />
+        <img src="https://count.getloli.com/get/@:todo?theme=moebooru" alt=":todo" />
       </main>
     </>
   );
