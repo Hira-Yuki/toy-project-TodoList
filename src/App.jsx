@@ -5,8 +5,9 @@ import WorkingList from "./Components/WorkingList";
 
 function App() {
   // 디버깅을 위해 사전에 저장된 할일 목록 = 동작 확인 완료 후 빈 배열로 변경
-  const [todoList, setTodoList] = useState([]);
-
+  const [todoList, setTodoList] = useState(
+    JSON.parse(localStorage.getItem("todoList")) || []
+  );
   // 제목 입력을 받는 공간
   const [subtitle, setSubtitle] = useState("");
   // 세부 할일을 입력 받는 공간
@@ -62,6 +63,20 @@ function App() {
       )
     );
   };
+
+  // 로컬 스토리지에서 데이터를 가져와 초기 할일 목록을 설정하는 함수
+  useEffect(() => {
+    const storedTodoList = JSON.parse(localStorage.getItem("todoList"));
+    if (storedTodoList) {
+      setTodoList(storedTodoList);
+    }
+  }, []);
+
+  //할일 목록이 변경될 때마다 로컬스토리지에 저장
+  useEffect(() => {
+    localStorage.setItem("todoList", JSON.stringify(todoList));
+  }, [todoList]);
+
 
   return (
     <>
