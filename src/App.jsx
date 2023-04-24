@@ -4,7 +4,8 @@ import DoneList from "./Components/DoneList";
 import WorkingList from "./Components/WorkingList";
 
 function App() {
-  // 디버깅을 위해 사전에 저장된 할일 목록 = 동작 확인 완료 후 빈 배열로 변경
+  // 로컬 스토리지에서 배열을 받아오도록 함
+  // 로컬 스토리지에서 가져올 수 있는 데이터가 없으면 빈 배열을 생성함
   const [todoList, setTodoList] = useState(
     JSON.parse(localStorage.getItem("todoList")) || []
   );
@@ -65,6 +66,8 @@ function App() {
   };
 
   // 로컬 스토리지에서 데이터를 가져와 초기 할일 목록을 설정하는 함수
+  // 컴포넌트가 처음 렌더링될 때 useEffect 함수가 호출되며, 
+  // 두 번째 인자로 빈 배열이 전달되어 있기 때문에 컴포넌트가 처음 마운트될 때만 실행됩니다.
   useEffect(() => {
     const storedTodoList = JSON.parse(localStorage.getItem("todoList"));
     if (storedTodoList) {
@@ -76,7 +79,6 @@ function App() {
   useEffect(() => {
     localStorage.setItem("todoList", JSON.stringify(todoList));
   }, [todoList]);
-
 
   return (
     <>
