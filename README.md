@@ -14,4 +14,4 @@ Create React App을 이용해 생성한 프로젝트입니다.
 ## 주의사항
 - Local Storage를 사용하여 데이터를 저장하고 불러오기 때문에 브러우저 청소를 하게 되면 데이터가 지워집니다.
 
-![:name](https://count.getloli.com/get/@:todo?theme=gelbooru)
+![:name](https://count.getloli.com/get/@:todo?theme=rule34)
