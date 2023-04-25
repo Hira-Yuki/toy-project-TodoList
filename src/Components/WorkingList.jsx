@@ -1,6 +1,8 @@
 function WorkingList({ todoList, onDoneHandler, removeTodoButton }) {
-    return (
-      <>
+  return (
+    <>
+      <h2>Working...!!</h2>
+      <div className="grid outputSpace">
         {todoList
           .filter((item) => !item.isDone)
           .map((item) => (
@@ -18,7 +20,8 @@ function WorkingList({ todoList, onDoneHandler, removeTodoButton }) {
               </footer>
             </article>
           ))}
-      </>
-    );
-  }
-  export default WorkingList
+      </div>
+    </>
+  );
+}
+export default WorkingList;

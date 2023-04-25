@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import DoneList from "./Components/DoneList";
 import WorkingList from "./Components/WorkingList";
+import Input from "./Components/Input";
 
 function App() {
   // 로컬 스토리지에서 배열을 받아오도록 함
@@ -55,7 +56,7 @@ function App() {
       )
     );
   };
-  
+
   // 완료인 상태를 다시 작업 중으로 변경
   const onWorkingHandler = (id) => {
     setTodoList((prevState) =>
@@ -66,7 +67,7 @@ function App() {
   };
 
   // 로컬 스토리지에서 데이터를 가져와 초기 할일 목록을 설정하는 함수
-  // 컴포넌트가 처음 렌더링될 때 useEffect 함수가 호출되며, 
+  // 컴포넌트가 처음 렌더링될 때 useEffect 함수가 호출되며,
   // 두 번째 인자로 빈 배열이 전달되어 있기 때문에 컴포넌트가 처음 마운트될 때만 실행됩니다.
   useEffect(() => {
     const storedTodoList = JSON.parse(localStorage.getItem("todoList"));
@@ -83,51 +84,30 @@ function App() {
   return (
     <>
       <main className="container">
+        {/* 헤딩 영역 */}
         <div className="heading">
           <h1>My To do list!</h1>
         </div>
-        <div className="inputSpace">
-          <div>
-            <h2>할일을 기록하세요.</h2>
-            <input
-              type="text"
-              value={subtitle}
-              placeholder="제목을 입력하세요"
-              onChange={onSubtitleChangeHandler}
-            />
-          </div>
-          <div>
-            <input
-              type="text"
-              value={todo}
-              placeholder="내용을 입력하세요"
-              onChange={onTodoChangeHandler}
-            />
-          </div>
-          <button className="outline" onClick={onSubmitHandler}>
-            저장
-          </button>
-        </div>
-        <div>
-          <h2>Working...!!</h2>
-          <div className="grid outputSpace">
-            {/* 이 곳이 진행 중인 리스트가 들어갈 공간 */}
-            <WorkingList
-              todoList={todoList}
-              onDoneHandler={onDoneHandler}
-              removeTodoButton={removeTodoButton}
-            />
-          </div>
-          <h2>Done!!</h2>
-          <div className="grid outputSpace">
-            {/* 이 곳이 완료된 리스트가 들어갈 공간 */}
-            <DoneList
-              todoList={todoList}
-              onWorkingHandler={onWorkingHandler}
-              removeTodoButton={removeTodoButton}
-            />
-          </div>
-        </div>
+        {/* 인풋 영역 */}
+        <Input
+          subtitle={subtitle}
+          onSubtitleChangeHandler={onSubtitleChangeHandler}
+          todo={todo}
+          onTodoChangeHandler={onTodoChangeHandler}
+          onSubmitHandler={onSubmitHandler}
+        />
+        {/* 이 곳이 진행 중인 리스트가 들어갈 공간 */}
+        <WorkingList
+          todoList={todoList}
+          onDoneHandler={onDoneHandler}
+          removeTodoButton={removeTodoButton}
+        />
+        {/* 이 곳이 완료된 리스트가 들어갈 공간 */}
+        <DoneList
+          todoList={todoList}
+          onWorkingHandler={onWorkingHandler}
+          removeTodoButton={removeTodoButton}
+        />
       </main>
     </>
   );

@@ -1,6 +1,8 @@
 function DoneList({ todoList, onWorkingHandler, removeTodoButton }) {
-    return (
-      <>
+  return (
+    <>
+      <h2>Done!!</h2>
+      <div className="grid outputSpace">
         {todoList
           .filter((item) => item.isDone)
           .map((item) => (
@@ -23,8 +25,9 @@ function DoneList({ todoList, onWorkingHandler, removeTodoButton }) {
               </footer>
             </article>
           ))}
-      </>
-    );
-  }
+      </div>
+    </>
+  );
+}
 
-  export default DoneList
+export default DoneList;
